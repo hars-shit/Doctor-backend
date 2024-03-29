@@ -1,6 +1,7 @@
 const express=require('express');
 const connect = require('./Database/connect');
 const register = require('./schema/register');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const cors=require('cors')
 const app=express();
 
