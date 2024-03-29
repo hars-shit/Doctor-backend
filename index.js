@@ -59,6 +59,26 @@ app.get('/doctors',async(req,res)=>{
     }
 })
 
+// for prompts 
+
+const genAI=new GoogleGenerativeAI(
+    'AIzaSyDjmbWR9uqqZ5FeLxq3sHLmZrlHFLAS7TQ'
+)
+
+app.post('/chat',async(req,res)=>{
+    console.log(req.body.message)
+    const model=genAI.getGenerativeModel({model:"gemini-pro"})
+
+    const chat=model.startChat({
+        history:req.body.history
+    })
+    const msg=req.body.message;
+    const result=await chat.sendMessage(msg)
+    const response=result.response;
+    const text=response.text()
+    res.send(text)
+})
+
 app.listen(PORT,()=>{
     console.log(`Server is listening to ${PORT}`)
 })
