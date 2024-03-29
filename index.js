@@ -1,10 +1,10 @@
 const express=require('express');
 const connect = require('./Database/connect');
 const register = require('./schema/register');
-
+const cors=require('cors')
 const app=express();
 
-
+app.use(cors())
 app.use(express.json());
 
 connect()
