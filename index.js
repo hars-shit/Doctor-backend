@@ -60,6 +60,24 @@ app.get('/doctors',async(req,res)=>{
     }
 })
 
+// for individual doctor 
+
+app.get('/doctors/:id',async(req,res)=>{
+    try{
+        const doctorId=req.params.id;
+        const doctor=await register.findById(doctorId);
+
+        if(!doctor){
+            res.status(404).json({message:"Doctor not found"})
+        }
+        res.json(doctor);
+    }
+    catch(error){
+        console.error("Error fetching data:", error);
+        res.status(500).json({ message: "Failed to fetch data", error: error.message });
+    }
+})
+
 // for prompts 
 
 const genAI=new GoogleGenerativeAI(
